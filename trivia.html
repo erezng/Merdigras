@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MAIN</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+</head>
+
+<header>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="images/logo.png" height="170px" width="170px" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="main.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="About.html">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Media.html">MEDIA</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Contact.html">CONTACT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="FAQ.html">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="trivia.html">TRIVIA</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <h2>Wellcome to TRIVIA game you can win up to 1M$</h2>
+  <section>
+    <div class="containertrivia">
+      <div id="quiz">click to start</div>
+      <button id="submit" class="btn btn-primary">Get Results</button>
+      <div id="results"></div>
+    </div>
+
+    <script>
+      var myQuestions = [
+        {
+          question: "Where is the festival?",
+          answers: {
+            a: 'USA',
+            b: 'Ireland',
+            c: 'Canada'
+          },
+          correctAnswer: 'a'
+        },
+        {
+          question: "When is the festival begins?",
+          answers: {
+            a: '3',
+            b: '5',
+            c: '10'
+          },
+          correctAnswer: 'c'
+        },
+        {
+          question: "What is name of mayor?",
+          answers: {
+            a: 'LaToya',
+            b: '5',
+            c: '10'
+          },
+          correctAnswer: 'a'
+        },
+        {
+          question: "What can you bring?",
+          answers: {
+            a: 'towel',
+            b: 'bag',
+            c: 'water'
+          },
+          correctAnswer: 'b'
+        },
+        {
+          question: "What is name of festival?",
+          answers: {
+            a: 'merdi',
+            b: 'gras',
+            c: 'merdi gras'
+          },
+          correctAnswer: 'c'
+        },
+        {
+          question: "What is name of city?",
+          answers: {
+            a: 'New orleans',
+            b: 'Tokyo',
+            c: 'Jerusalem'
+          },
+          correctAnswer: 'a'
+        },
+        {
+          question: "What is main color of festival?",
+          answers: {
+            a: 'Green',
+            b: 'Red',
+            c: 'Blue'
+          },
+          correctAnswer: 'c'
+        },
+        {
+          question: "What date is the next festival?",
+          answers: {
+            a: '2023',
+            b: '2025',
+            c: '2030'
+          },
+          correctAnswer: 'a'
+        },
+        {
+          question: "How many days the festival?",
+          answers: {
+            a: '3',
+            b: '5',
+            c: '10'
+          },
+          correctAnswer: 'a'
+        },
+        {
+          question: "How can you come?",
+          answers: {
+            a: 'bus',
+            b: 'car',
+            c: 'train'
+          },
+          correctAnswer: 'b'
+        }
+      ];
+
+      var quizContainer = document.getElementById('quiz');
+      var resultsContainer = document.getElementById('results');
+      var submitButton = document.getElementById('submit');
+
+      generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+      function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+
+        function showQuestions(questions, quizContainer) {
+          // we'll need a place to store the output and the answer choices
+          var output = [];
+          var answers;
+
+          // for each question...
+          for (var i = 0; i < questions.length; i++) {
+
+            // first reset the list of answers
+            answers = [];
+
+            // for each available answer...
+            for (letter in questions[i].answers) {
+
+              // ...add an html radio button
+              answers.push(
+                '<label>'
+                + '<input type="radio"+" " name="question' + i + '" value="' + letter + '">'
+                + letter + ': '
+                + questions[i].answers[letter]
+                + '</label>'
+              );
+            }
+
+            // add this question and its answers to the output
+            output.push(
+              '<div class="question">' + questions[i].question + '</div>'
+              + '<div class="answers">' + answers.join('') + '</div>'
+            );
+          }
+
+          // finally combine our output list into one string of html and put it on the page
+          quizContainer.innerHTML = output.join('');
+        }
+
+
+        function showResults(questions, quizContainer, resultsContainer) {
+
+          // gather answer containers from our quiz
+          var answerContainers = quizContainer.querySelectorAll('.answers');
+
+          // keep track of user's answers
+          var userAnswer = '';
+          var numCorrect = 0;
+
+          // for each question...
+          for (var i = 0; i < questions.length; i++) {
+
+            // find selected answer
+            userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+            // if answer is correct
+            if (userAnswer === questions[i].correctAnswer) {
+              // add to the number of correct answers
+              numCorrect++;
+
+              // color the answers green
+              answerContainers[i].style.color = 'lightgreen';
+            }
+            // if answer is wrong or blank
+            else {
+              // color the answers red
+              answerContainers[i].style.color = 'red';
+            }
+          }
+
+          // show number of correct answers out of total
+          resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+        }
+
+        // show questions right away
+
+        quizContainer.onclick = function () {
+          showQuestions(questions, quizContainer);
+        }
+
+        // on submit, show results
+        submitButton.onclick = function () {
+          showResults(questions, quizContainer, resultsContainer);
+        }
+
+      }
+
+    </script>
+
+</body>
+
+
+<footer id="footer" class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="first content">
+          <h2>Follow us</h2>
+          <p>This site built by EREZ GABAY <br>
+            All rights reserved!</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="Second content">
+          <h2>Contact us</h2>
+          <form class="" action="index.html" method="post">
+            <div class="email">
+              <div class="text py-2">
+                email* <br>
+                <input type="email" class="email" name="" value="">
+
+              </div>
+
+              <div class="msg">
+                <div class="text py-2">
+                  message* <br>
+                  <textarea name="name" id="" cols="30" rows="2"></textarea>
+                </div>
+                <a class="btn btn-primary" value="Click" id="btn" id="btn">Send</a>
+
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+  integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+  integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+
+</html>

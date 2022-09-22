@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MEDIA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="images/logo.png" height="170px" width="170px" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="main.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.html">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Media.html">MEDIA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Contact.html">CONTACT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="FAQ.html">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trivia.html">TRIVIA</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<body>
+    <h2 style="text-align:center">Gallery</h2>
+
+    <div class="row">
+        <div class="column">
+            <img src="images/one.jpg" style="width:100%" onclick="openModal();currentSlide(1)"
+                class="hover-shadow cursor">
+        </div>
+        <div class="column">
+            <img src="images/stores.jpg" style="width:100%" onclick="openModal();currentSlide(2)"
+                class="hover-shadow cursor">
+        </div>
+        <div class="column">
+            <img src="images/nature.jpg" style="width:100%" onclick="openModal();currentSlide(3)"
+                class="hover-shadow cursor">
+        </div>
+        <div class="column">
+            <img src="images/boat.jpg" style="width:100%" onclick="openModal();currentSlide(4)"
+                class="hover-shadow cursor">
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+
+            <div class="mySlides">
+                <div class="numbertext">1 / 4</div>
+                <img src="images/one.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 4</div>
+                <img src="images/stores.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 4</div>
+                <img src="images/nature.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 4</div>
+                <img src="images/boat.jpg" style="width:100%">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="caption-container">
+                <p id="caption"></p>
+
+
+                <div class="column">
+                    <img class="demo cursor" src="images/one.jpg" style="width:100%" onclick="currentSlide(1)"
+                        alt="Nature and sunrise">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/stores.jpg" style="width:100%" onclick="currentSlide(2)"
+                        alt="Snow">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/nature.jpg" style="width:100%" onclick="currentSlide(3)"
+                        alt="Mountains and fjords">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/boat.jpg" style="width:100%" onclick="currentSlide(4)"
+                        alt="Northern Lights">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+    </script>
+    <br> <br>
+
+    <div class="youtube">
+        <H1>Video</H1>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/YrVHv7FD-7o" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/EGnLaXMCFVY" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+</body>
+
+<footer id="footer" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="first content">
+                    <h2>Follow us</h2>
+                    <p>This site built by EREZ GABAY <br>
+                        All rights reserved!</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="Second content">
+                    <h2>Contact us</h2>
+                    <form class="" action="index.html" method="post">
+                        <div class="email">
+                            <div class="text py-2">
+                                email* <br>
+                                <input type="email" class="py-2" name="" value="">
+
+                            </div>
+
+                            <div class="msg">
+                                <div class="text py-2">
+                                    message* <br>
+                                    <textarea name="name" id="" cols="30" rows="2"></textarea>
+                                </div>
+                                <a class="btn btn-primary" value="Click" id="btn" id="btn">Send</a>
+
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+    integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+    crossorigin="anonymous"></script>
+
+
+</html>
